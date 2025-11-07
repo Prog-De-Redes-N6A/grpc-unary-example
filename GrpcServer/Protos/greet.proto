@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "GrpcServer";
+
+package greet;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  // Adds two numbers
+  rpc AddNumbers (AddRequest) returns (AddReply);
+  // Pedir lista de usuarios
+  rpc GetUserList(google.protobuf.Empty) returns (UserListReply);
+}
+
+message AddRequest {
+  int32 numA = 1;
+  int32 numB = 2;
+}
+
+message AddReply {
+  int32 sum = 1;
+}
+
+message UserListReply {
+  repeated User users = 1;
+  optional int32 maxAge = 2; 
+}
+
+enum Gender {
+	Male = 0;
+	Female = 1;
+	Other = 3;
+}
+
+message User {
+	string name = 1;
+	int32 age = 2;
+	Gender gender = 3;
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message HelloReply {
+  string message = 1;
+}
